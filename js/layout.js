@@ -9,5 +9,8 @@ document.getElementById('header').innerHTML = `
 
 document.getElementById('footer').innerHTML = `
 <footer>
-  <h2>前端阿彬</h2>
+  <h2>Create by <a href="https://github.com/web-abin"/>web-abin</a></h2>
+  <a href="https://github.com/web-abin"/>前端助手</a>
+  <a href="https://juejin.cn/user/994399097982728"/>掘金主页</a>
+  <a href="https://blog.csdn.net/qq_38974163?type=blog"/>CSDN</a>
 </footer>`

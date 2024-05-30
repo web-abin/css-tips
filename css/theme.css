@@ -1,6 +1,7 @@
 :root{
   --header-height: 70px;
   --footer-height: 52px;
+  --color1: #2c1c13;
 }
 
 [theme="light"]{
