@@ -52,6 +52,7 @@
     <div id="footer"></div>
     <script src="./js/layout.js"></script>
     <script src="./js/theme.js"></script>
+    <script src="./js/utils.js"></script>
 
     <script>
       const listDom = document.getElementById('list')
@@ -64,7 +65,7 @@
           for (const item of data) {
             htmlFrag += `<li>
             <a href="./${ item.name }.html">${item.desc}</a>
-            <time datetime="2024-05-25">${item.createTime}</time>
+            <time datetime="2024-05-25">${ formatDate(item.createTime) }</time>
           </li>`
           }
           listDom.innerHTML = htmlFrag
