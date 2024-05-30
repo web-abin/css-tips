@@ -36,6 +36,10 @@ header {
     font-family: 'Courier New', Courier, monospace;
     color: inherit;
   }
+  a{
+    color: inherit;
+    text-decoration: none;
+  }
 
   & nav {
     display: flex;

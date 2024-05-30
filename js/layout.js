@@ -1,6 +1,6 @@
 document.getElementById('header').innerHTML = `
 <header>
-  <h1>CSS Tips</h1>
+  <h1><a href="./">CSS Tips</a></h1>
   <nav>
     <a href="./">首页</a>
     <a href="./about.html">关于我</a>
