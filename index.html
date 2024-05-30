@@ -8,12 +8,70 @@
   <title>CSS-Tips</title>
   <link rel="stylesheet" href="./css/common.css">
   <link rel="stylesheet" href="./css/theme.css">
+  <style>
+    ul {
+      list-style: none;
+    }
+
+    li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 68px;
+
+      & a {
+        width: 100%;
+        margin-bottom: 2px;
+        font-size: 18px;
+        color: #863909;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      & time {
+        font-size: 13px;
+        color: #fffafa;
+      }
+    }
+  </style>
 </head>
 
 <body theme="light">
   <div id="website">
     <div id="header"></div>
+
+    <main>
+      <div id="list">
+        <ul>
+
+        </ul>
+      </div>
+    </main>
+
+    <div id="footer"></div>
     <script src="./js/layout.js"></script>
+    <script src="./js/theme.js"></script>
+
+    <script>
+      const listDom = document.getElementById('list')
+      let htmlFrag = ''
+      fetch('./map.json')
+        // 将响应转换为 JSON
+        .then(response => response.json())
+        // 使用 JSON 数据
+        .then(data => {
+          for (const item of data) {
+            htmlFrag += `<li>
+            <a href="./${ item.name }.html">${item.desc}</a>
+            <time datetime="2024-05-25">${item.createTime}</time>
+          </li>`
+          }
+          listDom.innerHTML = htmlFrag
+        })
+        // 捕获错误
+        .catch(error => console.error('Error:', error));
+    </script>
   </div>
 </body>
+
 </html>

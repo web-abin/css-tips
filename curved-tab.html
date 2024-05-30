@@ -3,23 +3,62 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" href="./favicon.ico">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
   <title>CSS-Tips</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/theme.css">
+  <style>
+    .rounded-tab {
+      --r: 20px;
+      /* control the curvature*/
+      border-inline: var(--r) solid #0000;
+      border-radius: calc(2*var(--r)) calc(2*var(--r)) 0 0/var(--r);
+      mask:
+        radial-gradient(var(--r) at var(--r) 0, #0000 98%, #000 101%) calc(-1*var(--r)) 100%/100% var(--r) repeat-x,
+        conic-gradient(#000 0 0) padding-box;
+    }
+
+    .rounded-tab.left {
+      border-left-width: 0;
+      border-top-left-radius: var(--r);
+    }
+
+    .rounded-tab.right {
+      border-right-width: 0;
+      border-top-right-radius: var(--r);
+    }
+
+    .rounded-tab {
+      margin: 20px 0;
+      width: fit-content;
+      font-family: system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      line-height: 1.8;
+      /* control the height */
+      padding-inline: .5em;
+      background: linear-gradient(60deg, #BD5532, #601848) border-box;
+      /* border-box is mandatory */
+    }
+  </style>
 </head>
 
-<body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.js"></script>
-  <script>
-    (function () {
-      var redirect = sessionStorage.redirect;
-      delete sessionStorage.redirect;
-      if (redirect && redirect != location.href) {
-        history.replaceState(null, null, redirect);
-      }
-    })();
-  </script>
+<body theme="light">
+  <div id="website">
+    <div id="header"></div>
+
+    <main>
+      <div class="rounded-tab">CSS round tab</div>
+      <div class="rounded-tab left">CSS left tab</div>
+      <div class="rounded-tab right">CSS right tab</div>
+    </main>
+
+    <div id="footer"></div>
+    <script src="./js/layout.js"></script>
+    <script src="./js/theme.js"></script>
+  </div>
 </body>
 
 </html>
