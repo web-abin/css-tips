@@ -5,7 +5,7 @@ function formatDate(time) {
   let Y = _time.getFullYear()
   let M = _time.getMonth() + 1
   let D = _time.getDate()
-  return `${Y}-${startWith(M)}-${startWith(D)}`
+  return `${Y}年${startWith(M)}月${startWith(D)}日`
 }
 
 // 前面补0

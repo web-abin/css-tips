@@ -15,10 +15,21 @@
     }
 
     li {
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       height: 68px;
+      padding-left: 20px;
+
+      &::before {
+        content: '❋';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #f4daca;
+      }
 
       & a {
         width: 100%;
@@ -31,7 +42,11 @@
 
       & time {
         font-size: 13px;
-        color: #fffafa;
+        color: #f4daca;
+
+        & ::before {
+          display: none;
+        }
       }
     }
   </style>
@@ -64,8 +79,8 @@
         .then(data => {
           for (const item of data) {
             htmlFrag += `<li>
-            <a href="./${ item.name }.html">${item.desc}</a>
-            <time datetime="2024-05-25">${ formatDate(item.createTime) }</time>
+            <a href="./${item.name}.html">${item.desc}</a>
+            <time datetime="2024-05-25">${formatDate(item.createTime)}</time>
           </li>`
           }
           listDom.innerHTML = htmlFrag
