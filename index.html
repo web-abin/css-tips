@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="./css/common.css">
   <link rel="stylesheet" href="./css/theme.css">
   <style>
+    #list {
+      padding: 20px 0;
+    }
+
     ul {
       list-style: none;
     }
@@ -28,21 +32,25 @@
         left: 0;
         top: 50%;
         transform: translateY(-50%);
-        color: #f4daca;
+        color: var(--color-gray);
       }
 
       & a {
-        width: 100%;
+        width: fit-content;
         margin-bottom: 2px;
         font-size: 18px;
-        color: #863909;
+        color: var(--color-main);
         font-weight: bold;
         white-space: nowrap;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       & time {
         font-size: 13px;
-        color: #f4daca;
+        color: var(--color-gray);
 
         & ::before {
           display: none;
@@ -54,8 +62,6 @@
 
 <body theme="light">
   <div id="website">
-    <div id="header"></div>
-
     <main>
       <div id="list">
         <ul>
@@ -63,10 +69,7 @@
         </ul>
       </div>
     </main>
-
-    <div id="footer"></div>
     <script src="./js/layout.js"></script>
-    <script src="./js/theme.js"></script>
     <script src="./js/utils.js"></script>
 
     <script>

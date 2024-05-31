@@ -1,14 +1,71 @@
-:root{
+:root {
   --header-height: 70px;
   --footer-height: 52px;
-  --color1: #2c1c13;
 }
 
-[theme="light"]{
+[theme='light'] {
+  --line-height: 1.8;
+  --line-height-md-h: 2.2;
   /* 系统背景色 */
   /* 线条色 */
-  --system-c1: #ae876f;
-  --system-c2: #b58c73;
-  --system-g: #0000 66%, var(--system-c1) 68% 98%, #0000;
+  --system-c1: #fbfbfb;
+  --system-c2: #ffffff;
+  --system-g: #f0171700 66%, var(--system-c1) 68% 98%, #0000;
+  --system-bg: radial-gradient(30% 30% at 0% 30%, var(--system-g))
+      var(--system-s) calc(9 * var(--system-s)),
+    radial-gradient(30% 30% at 100% 30%, var(--system-g)) var(--system-s)
+      calc(-1 * var(--system-s)),
+    radial-gradient(30% 30% at 30% 100%, var(--system-g))
+      calc(10 * var(--system-s)) 0,
+    radial-gradient(30% 30% at 30% 0%, var(--system-g)) var(--system-c2);
+  /* 标题色 */
+  --color-title: #2c1c13;
+  /* 首页列表标题色 */
+  --color-main: #4d311f;
+  /* 备注色 */
+  --color-gray: #f2b692;
   --color-gray-border: #e0e0e0;
+  /* 切换主题按钮颜色 */
+  --btn-theme-bg: #fff;
+  --btn-theme-fg: #212121;
+  /* 正文色 */
+  --color-content: #383838;
+  /* md标题色 */
+  --color-md-h1: #252933;
+
+  /* 文本选中颜色 */
+  --color-selection-bg: rgb(90, 240, 67);
+  --color-selection: black;
+}
+
+[theme='dark'] {
+  --line-height: 2.4;
+  --line-height-md-h: 2.6;
+  /* 系统背景色 */
+  /* 线条色 */
+  --system-c1: #211424;
+  --system-c2: #251c27;
+  --system-g: #0000 66%, var(--system-c1) 68% 98%, #0000;
+  --system-bg: radial-gradient(30% 30% at 0% 30%, var(--system-g))
+      var(--system-s) calc(9 * var(--system-s)),
+    radial-gradient(30% 30% at 100% 30%, var(--system-g)) var(--system-s)
+      calc(-1 * var(--system-s)),
+    radial-gradient(30% 30% at 30% 100%, var(--system-g))
+      calc(10 * var(--system-s)) 0,
+    radial-gradient(30% 30% at 30% 0%, var(--system-g)) var(--system-c2);
+    
+  --color-title: #f3f3f3;
+  --color-main: #eae6fb;
+  --color-gray: #f3f3f3;
+  --color-gray-border: #e0e0e0;
+  /* 切换主题按钮颜色 */
+  --btn-theme-bg: #ffcf21;
+  --btn-theme-fg: #037ffa;
+  /* 正文色 */
+  --color-content: #ffffff;
+  --color-md-h1: #e1e5ee;
+
+  /* 文本选中颜色 */
+  --color-selection-bg: yellow;
+  --color-selection: black;
 }

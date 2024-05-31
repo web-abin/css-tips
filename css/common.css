@@ -10,21 +10,36 @@
     Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
     Courier, monospace;
 }
+/* 隐藏默认的过渡效果 */
+::view-transition-new(root),
+::view-transition-old(root) {
+  animation: none;
+}
+
+::selection {
+  background: var(--color-selection-bg);
+  color: var(--color-selection);
+}
+
+::-moz-selection {
+  background: var(--color-selection-bg);
+  color: var(--color-selection);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
 body {
   --system-s: 3px; /* control the size*/
   width: 100%;
-  background: radial-gradient(30% 30% at 0% 30%, var(--system-g))
-      var(--system-s) calc(9 * var(--system-s)),
-    radial-gradient(30% 30% at 100% 30%, var(--system-g)) var(--system-s)
-      calc(-1 * var(--system-s)),
-    radial-gradient(30% 30% at 30% 100%, var(--system-g))
-      calc(10 * var(--system-s)) 0,
-    radial-gradient(30% 30% at 30% 0%, var(--system-g)) var(--system-c2);
+  background: var(--system-bg);
   background-attachment: fixed;
   background-size: calc(20 * var(--system-s)) calc(20 * var(--system-s));
   font-size: 14rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--line-height);
+  color: var(--color-content);
 }
 
 #website {
@@ -42,7 +57,8 @@ header {
   border-image: linear-gradient(to top, var(--color-gray-border) 1px, #0000 0)
     fill 0 / 0 /0 100vw;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: var(--color1);
+  color: var(--color-title);
+  user-select: none;
   & h1 {
     font-family: 'Courier New', Courier, monospace;
     color: inherit;
@@ -54,8 +70,9 @@ header {
 
   & nav {
     display: flex;
+    align-items: center;
     gap: 20px;
-    & a {
+    a {
       color: inherit;
       & :visited {
         color: rgb(255, 132, 0);
@@ -79,7 +96,8 @@ footer {
   gap: 20px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 12px;
-  color: var(--color1);
+  color: var(--color-title);
+  user-select: none;
   & a {
     font-size: inherit;
     color: inherit;
@@ -87,9 +105,103 @@ footer {
 }
 
 main {
+  position: relative;
   min-height: calc(100vh - var(--header-height) - var(--footer-height));
   height: fit-content;
-  overflow: hidden;
+  padding: 20px 0;
+  
+  h1 {
+    width: 100%;
+    color: var(--color-md-h1);
+    font-size: 22px;
+    line-height: var(--line-height-md-h);
+    font-weight: bold;
+    text-align: center;
+  }
+  h2 {
+    color: var(--color-md-h1);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: var(--line-height-md-h);
+  }
+  h3 {
+    color: var(--color-md-h1);
+    font-size: 16px;
+    line-height: var(--line-height-md-h);
+  }
+  h4 {
+    font-size: 14px;
+  }
+  #content {
+    font-size: 14px;
+    line-height: var(--line-height);
+  }
+}
+
+/* 底部切换上下篇 */
+#page-change {
+  width: 100%;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 20px;
+  left: 0;
+  a {
+    position: relative;
+    color: var(--color-main);
+    font-size: 18px;
+    font-weight: bold;
+    &:first-of-type {
+      padding-left: 1.5em;
+      --t: calc(-100% - 3em);
+      &:before {
+        content: '';
+        position: absolute;
+        inset: 0 100% 0 auto;
+        left: 0;
+        width: 1em;
+        background: currentColor;
+        clip-path: polygon(100% 0, 0 50%, 100% 100%);
+      }
+    }
+    &:last-of-type {
+      padding-right: 1.5em;
+      --t: calc(100% + 3em);
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 100%;
+        margin-left: -1em;
+        width: 1em;
+        background: currentColor;
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+      }
+    }
+  }
+}
+@supports (animation-timeline: scroll(root)) {
+  #page-change > * {
+    animation: t 1s linear;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes t {
+    0%,
+    95% {
+      transform: translate(var(--t));
+    }
+
+    to {
+      transform: translate(0);
+    }
+  }
+}
+@media (max-width: 900px) {
+  .links-nextprev {
+    position: static;
+  }
 }
 
 pre,
@@ -118,6 +230,122 @@ pre {
 }
 pre::-webkit-scrollbar {
   /* padding: 0 10px; */
+}
+
+/* 切换主题按钮 */
+#btn-theme {
+  --transition-time: 0.2s;
+  position: relative;
+  background-color: var(--btn-theme-fg);
+  border-radius: 10px;
+  --dimensions: 30px;
+  width: var(--dimensions);
+  height: var(--dimensions);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  contain: layout;
+
+  .spread {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--dimensions);
+    height: var(--dimensions);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .spread.visible {
+    opacity: 0.7;
+    animation: spread 0.6s ease-out 1 forwards,
+      spread-opacity 0.6s ease-out 1 forwards;
+  }
+}
+@keyframes spread {
+  to {
+    transform: translate(-50%, -50%) scale(80);
+  }
+}
+@keyframes spread-opacity {
+  80% {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#btn-theme .main-circle {
+  --dimensions: 10px;
+  width: var(--dimensions);
+  height: var(--dimensions);
+  background-color: var(--btn-theme-bg);
+  border-radius: 50%;
+  position: absolute;
+  transition: transform var(--transition-time) ease;
+}
+
+#btn-theme .main-circle::after {
+  content: '';
+  background-color: var(--btn-theme-fg);
+  border-radius: 50%;
+  --dimensions: 10px;
+  width: var(--dimensions);
+  height: var(--dimensions);
+  position: absolute;
+  top: 1px;
+  right: -1px;
+  transform-origin: right top;
+  transform: scale(0);
+  transition: transform var(--transition-time) ease;
+}
+
+#btn-theme .sun-rays {
+  display: grid;
+  place-items: center;
+  transition: transform var(--transition-time) ease;
+}
+
+#btn-theme .sun-rays,
+#btn-theme .sun-rays::after,
+#btn-theme .sun-rays::before {
+  --width: 1px;
+  --height: 3px;
+  width: var(--width);
+  height: var(--height);
+  background-color: var(--btn-theme-bg);
+  position: absolute;
+  box-shadow: 0 10px 0 var(--btn-theme-bg), 0 -10px 0 var(--btn-theme-bg);
+}
+
+#btn-theme .sun-rays::after {
+  content: '';
+  transform: rotate(120deg);
+}
+
+#btn-theme .sun-rays::before {
+  content: '';
+  transform: rotate(240deg);
+}
+
+.btn-theme_changed .main-circle {
+  transform: scale(1.6);
+}
+
+.btn-theme_changed .main-circle::after {
+  transform: scale(0.7) !important;
+}
+
+.btn-theme_changed .sun-rays {
+  transition: transform 0.4s;
+  transform: scale(0);
 }
 
 html {
