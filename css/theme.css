@@ -55,7 +55,7 @@
     radial-gradient(30% 30% at 30% 0%, var(--system-g)) var(--system-c2);
     
   --color-title: #f3f3f3;
-  --color-main: #eae6fb;
+  --color-main: #ffa7f3;
   --color-gray: #f3f3f3;
   --color-gray-border: #e0e0e0;
   /* 切换主题按钮颜色 */
@@ -63,7 +63,7 @@
   --btn-theme-fg: #037ffa;
   /* 正文色 */
   --color-content: #ffffff;
-  --color-md-h1: #e1e5ee;
+  --color-md-h1: #ffa7f3;
 
   /* 文本选中颜色 */
   --color-selection-bg: yellow;
