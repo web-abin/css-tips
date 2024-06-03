@@ -36,6 +36,9 @@
   /* 文本选中颜色 */
   --color-selection-bg: rgb(90, 240, 67);
   --color-selection: black;
+
+  --button-bg: #000;
+  --button-color: #fff;
 }
 
 [theme='dark'] {
@@ -68,4 +71,7 @@
   /* 文本选中颜色 */
   --color-selection-bg: yellow;
   --color-selection: black;
+
+  --button-bg: #000000;
+  --button-color: #1cfd58;
 }

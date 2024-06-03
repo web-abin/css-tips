@@ -30,6 +30,17 @@ a {
   text-decoration: none;
   color: inherit;
 }
+button{
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  background: var(--button-bg);
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  color: var(--button-color);
+  cursor: pointer;
+}
 body {
   --system-s: 3px; /* control the size*/
   width: 100%;

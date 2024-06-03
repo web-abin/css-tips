@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="./favicon.ico">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta name="google" content="notranslate">
+  <title>CSS-Tips</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/theme.css">
+  <style>
+    .protocol {
+      display: flex;
+      align-items: center;
+
+      p {
+        width: 12px;
+        height: 12px;
+        outline: 6px solid transparent;
+        margin: -6px;
+        margin-right: 8px;
+        border-radius: 50%;
+        border: 1px solid red;
+        cursor: default;
+        user-select: none;
+        font-size: 8px;
+        display: grid;
+        place-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body theme="light">
+  <div id="website">
+    <main>
+      <div class="protocol">
+        <p></p>请同意用户协议
+      </div>
+    </main>
+    <script src="./js/layout.js"></script>
+  </div>
+
+  <script>
+    const select = document.querySelector('.protocol>p')
+    select.onclick = function() {
+      select.textContent = select.textContent === '✅' ? '' : '✅'
+    }
+  </script>
+</body>
+
+</html>

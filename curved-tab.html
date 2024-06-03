@@ -10,39 +10,134 @@
   <link rel="stylesheet" href="./css/common.css">
   <link rel="stylesheet" href="./css/theme.css">
   <style>
-    .rounded-tab {
+    .tab1 {
+      /* tab高度 */
+      --height: 36px;
+      /* 弧度半径 */
       --r: 20px;
-      --mask: radial-gradient(var(--r) at var(--r) 0, #0000 98%, #000 101%) calc(-1*var(--r)) 100%/100% var(--r) repeat-x,
-        conic-gradient(#000 0 0) padding-box;
-      /* control the curvature*/
-      border-inline: var(--r) solid #0000;
+      --bg: red;
+      position: relative;
+      width: 20em;
+      max-width: 90vw;
+      height: var(--height);
+      margin: 20px 0;
+      background: var(--bg);
+      display: grid;
+      place-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      white-space: nowrap;
+      border-radius: var(--r) var(--r) 0 0;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        width: var(--r);
+        aspect-ratio: 1;
+        background: var(--system-c2);
+      }
+
+      &::before {
+        left: calc(0px - var(--r));
+        border-radius: 0 0 var(--r) 0;
+      }
+
+      &::after {
+        right: calc(0px - var(--r));
+        border-radius: 0 0 0 var(--r);
+      }
+    }
+
+    .tab1>p {
+      position: absolute;
+      left: calc(0px - var(--r));
+      bottom: 0;
+      width: calc(100% + 2 * var(--r));
+      height: 50%;
+      background: linear-gradient(to right, var(--bg) 0, var(--bg) var(--r), #0000 var(--r), #0000 100%) 0 0/calc(100% - var(--r)) 100% repeat-x;
+    }
+
+    .tab2 {
+      /* tab高度 */
+      --height: 36px;
+      /* 弧度半径 */
+      --r: 20px;
+      --bg: red;
+      position: relative;
+      width: 20em;
+      max-width: 90vw;
+      height: var(--height);
+      margin: 20px 0;
+      background: var(--bg);
+      display: grid;
+      place-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      white-space: nowrap;
+      border-radius: var(--r) var(--r) 0 0;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        width: var(--r);
+        aspect-ratio: 1;
+      }
+
+      &::before {
+        left: calc(0px - var(--r));
+        background: radial-gradient(var(--r) at 0 0, transparent 100%, red 100%) 100% 100%/100% 100% no-repeat;
+      }
+
+      &::after {
+        right: calc(0px - var(--r));
+        background: radial-gradient(var(--r) at var(--r) 0, transparent 100%, red 100%) 0 100%/100% 100% no-repeat;
+      }
+    }
+
+
+    .tab3 {
+      /* tab高度 */
+      --height: 36px;
+      /* 弧度半径 */
+      --r: 14px;
+      /* tab 背景 */
+      --bg: linear-gradient(to right, red, blue) border-box;
+      /* 边框遮罩 */
+      --mask: radial-gradient(var(--r) at var(--r) 0, #0000 100%, #000 100%) calc(-1*var(--r)) 100%/100% var(--r) repeat-x,
+        linear-gradient(#000, #000) padding-box;
+      width: fit-content;
+      height: var(--height);
+      padding-inline: var(--r);
+      margin: 20px 0;
+      background: var(--bg);
+      display: grid;
+      place-content: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      border-left: var(--r) solid #0000;
+      border-right: var(--r) solid #0000;
       border-radius: calc(2*var(--r)) calc(2*var(--r)) 0 0/var(--r);
       mask: var(--mask);
       -webkit-mask: var(--mask);
     }
 
-    .rounded-tab.left {
+    .tab3.left {
       border-left-width: 0;
       border-top-left-radius: var(--r);
     }
 
-    .rounded-tab.right {
+    .tab3.right {
       border-right-width: 0;
       border-top-right-radius: var(--r);
-    }
-
-    .rounded-tab {
-      margin: 20px 0;
-      width: fit-content;
-      font-family: system-ui, sans-serif;
-      font-size: 16px;
-      font-weight: bold;
-      color: #fff;
-      line-height: 1.8;
-      /* control the height */
-      padding-inline: .5em;
-      background: linear-gradient(60deg, #BD5532, #601848) border-box;
-      /* border-box is mandatory */
     }
   </style>
 </head>
@@ -50,19 +145,163 @@
 <body theme="light">
   <div id="website">
     <main>
+      <h1>完美实现弧形tab</h1>
 
-      <div id="content"></div>
-
-
-      <div class="rounded-tab">CSS round tab</div>
-      <div class="rounded-tab left">CSS left tab</div>
-      <div class="rounded-tab right">CSS right tab</div>
+      <h2>方案1: 伪元素+1个额外元素</h2>
+      <div class="tab1">
+        <p></p>伪元素+1个额外元素
+      </div>
 
       <pre>
         <code>
-          mask:
-          radial-gradient(var(--r) at var(--r) 0, #0000 98%, #000 101%) calc(-1*var(--r)) 100%/100% var(--r) repeat-x,
-          conic-gradient(#000 0 0) padding-box;
+      .tab1 {
+        /* tab高度 */
+        --height: 36px;
+        /* 弧度半径 */
+        --r: 20px;
+        --bg: red;
+        position: relative;
+        width: 20em;
+        max-width: 90vw;
+        height: var(--height);
+        margin: 20px 0;
+        background: var(--bg);
+        display: grid;
+        place-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        white-space: nowrap;
+        border-radius: var(--r) var(--r) 0 0;
+  
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          z-index: 1;
+          width: var(--r);
+          aspect-ratio: 1;
+          background: var(--system-c2);
+        }
+  
+        &::before {
+          left: calc(0px - var(--r));
+          border-radius: 0 0 var(--r) 0;
+        }
+  
+        &::after {
+          right: calc(0px - var(--r));
+          border-radius: 0 0 0 var(--r);
+        }
+      }
+  
+      .tab1>p {
+        position: absolute;
+        left: calc(0px - var(--r));
+        bottom: 0;
+        width: calc(100% + 2 * var(--r));
+        height: 50%;
+        background: linear-gradient(to right, var(--bg) 0, var(--bg) var(--r), #0000 var(--r), #0000 100%) 0 0/calc(100% - var(--r)) 100% repeat-x;
+      }
+        </code>
+      </pre>
+
+      <h2>方案2: 伪元素 + 径向渐变</h2>
+      <div class="tab2">伪元素 + 径向渐变</div>
+
+      <pre>
+        <code>
+      .tab2 {
+        /* tab高度 */
+        --height: 36px;
+        /* 弧度半径 */
+        --r: 20px;
+        --bg: red;
+        position: relative;
+        width: 20em;
+        max-width: 90vw;
+        height: var(--height);
+        margin: 20px 0;
+        background: var(--bg);
+        display: grid;
+        place-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        white-space: nowrap;
+        border-radius: var(--r) var(--r) 0 0;
+  
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          z-index: 1;
+          width: var(--r);
+          aspect-ratio: 1;
+        }
+  
+        &::before {
+          left: calc(0px - var(--r));
+          background: radial-gradient(var(--r) at 0 0, transparent 100%, red 100%) 100% 100%/100% 100% no-repeat;
+        }
+  
+        &::after {
+          right: calc(0px - var(--r));
+          background: radial-gradient(var(--r) at var(--r) 0, transparent 100%, red 100%) 0 100%/100% 100% no-repeat;
+        }
+      }
+        </code>
+      </pre>
+
+      <h2>方案3: 不用伪元素，单标签实现（mask）</h2>
+
+      <div class="tab3">标题</div>
+      <div class="tab3 left">只有左边弧度</div>
+      <div class="tab3 right">只有右边弧度</div>
+
+
+      <pre>
+        <code>
+    .tab3 {
+      /* tab高度 */
+      --height: 36px;
+      /* 弧度半径 */
+      --r: 14px;
+      /* tab 背景 */
+      --bg: linear-gradient(to right, red, blue) border-box;
+      /* 边框遮罩 */
+      --mask: radial-gradient(var(--r) at var(--r) 0, #0000 100%, #000 100%) calc(-1*var(--r)) 100%/100% var(--r) repeat-x,
+        linear-gradient(#000, #000) padding-box;
+      width: fit-content;
+      height: var(--height);
+      padding-inline: var(--r);
+      margin: 20px 0;
+      background: var(--bg);
+      display: grid;
+      place-content: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      /* 靠border延伸出背景色，这里border设置透明也行，设置tab背景色也行，但是设置透明可以就不用后续调整了 */
+      border-left: var(--r) solid #0000;
+      border-right: var(--r) solid #0000;
+      /* 给 border-radius 让padding-box上边具有弧度 */
+      border-radius: calc(2*var(--r)) calc(2*var(--r)) 0 0/var(--r);
+      mask: var(--mask);
+      -webkit-mask: var(--mask);
+    }
+
+    .tab3.left {
+      border-left-width: 0;
+      border-top-left-radius: var(--r);
+    }
+
+    .tab3.right {
+      border-right-width: 0;
+      border-top-right-radius: var(--r);
+    }
         </code>
       </pre>
 
@@ -80,6 +319,11 @@
           var html = marked.parse(text);
           document.getElementById('content').innerHTML = html;
         });
+
+      const btnTest = document.getElementById('btn-test')
+      btnTest.onclick = function () {
+
+      }
     </script>
   </div>
 </body>
