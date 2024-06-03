@@ -159,6 +159,7 @@ main {
   position: sticky;
   bottom: 20px;
   left: 0;
+  user-select: none;
   a {
     position: relative;
     color: var(--color-main);
