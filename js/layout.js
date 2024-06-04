@@ -18,7 +18,7 @@
   const _webFooter = `
 <footer>
   <h2>Create by <a href="https://github.com/web-abin" rel="nofollow external" target="_blank"/>web-abin</a></h2>
-  <a href="https://github.com/web-abin" rel="nofollow external" target="_blank"/>前端助手</a>
+  <a href="https://web-abin.github.io/abinWeb/tools/" rel="nofollow external" target="_blank"/>前端助手</a>
   <a href="https://juejin.cn/user/994399097982728" rel="nofollow external" target="_blank"/>掘金主页</a>
   <a href="https://blog.csdn.net/qq_38974163?type=blog" rel="nofollow external" target="_blank"/>CSDN</a>
 </footer>`
