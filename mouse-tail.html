@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="./favicon.ico">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta name="google" content="notranslate">
+  <title>CSS-Tips</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/theme.css">
+  <style>
+    #flicker {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    #mouse-tail {
+      --transition-time: .2s;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 90px;
+      height: 90px;
+      transition: transform .1s ease;
+      pointer-events: none;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border: 3px solid transparent;
+        transition: all var(--transition-time) ease;
+      }
+
+      &::before {
+        left: 8px;
+        border-left: 6px solid #fff;
+      }
+
+      &::after {
+        right: 8px;
+        border-right: 6px solid #fff;
+      }
+
+      & .circle {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        transition: all var(--transition-time) ease;
+        -webkit-mask: linear-gradient(to right, #000 0%, #000 38%, #0000 38%, #0000 62%, #000 62%, #000 100%);
+        mask: linear-gradient(to right, #000 0%, #000 38%, #0000 38%, #0000 62%, #000 62%, #000 100%);
+      }
+
+      &>p {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        font-size: 10px;
+      }
+
+      &>.hold {
+        display: none;
+      }
+    }
+
+    #mouse-tail.active {
+      transform: scale(.8);
+      cursor: url(./images/cursor.svg) 24 24, auto;
+
+      &::before {
+        left: -8px;
+      }
+
+      &::after {
+        right: -8px;
+      }
+
+      & .circle {
+        transform: scale(.94);
+      }
+
+      &>p {
+        display: none;
+      }
+
+      &>.hold {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        bottom: unset;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+
+    body {
+      cursor: url(./images/cursor.svg) 24 24, auto;
+    }
+  </style>
+</head>
+
+<body theme="light">
+  <div id="website">
+    <main>
+
+    </main>
+  </div>
+  <div id="mouse-tail">
+    <div class="circle"></div>
+    <p>CLICK & HOLD</p>
+    <p class="hold">HOLD</p>
+  </div>
+  <div id="flicker"></div>
+  <script src="./js/layout.js"></script>
+  <script>
+    const mouseTail = document.getElementById('mouse-tail')
+    const flicker = document.getElementById('flicker')
+
+    document.addEventListener('mousemove', function (e) {
+      mouseTail.style.transform = `translate(${e.clientX - 45 + 'px'}, ${e.clientY - 45 + 'px'})`
+    });
+
+    document.addEventListener('mousedown', function () {
+      mouseTail.classList.add('active')
+      document.body.style.cursor = "none";
+      flicker.animate([{
+        background: '0'
+      }, {
+        background: '#7d17fb'
+      }], {
+        duration: 60,
+        iterations: 6
+      })
+
+      document.addEventListener('mouseup', function () {
+        mouseTail.classList.remove('active')
+        document.body.style.cursor = "url(./images/cursor.svg) 24 24, auto";
+        document.removeEventListener('mouseup')
+      })
+    })
+  </script>
+</body>
+
+</html>

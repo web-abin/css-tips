@@ -15,11 +15,10 @@
       align-items: center;
 
       p {
+        position: relative;
         width: 12px;
         height: 12px;
-        outline: 6px solid transparent;
-        margin: -6px;
-        margin-right: 8px;
+        margin-right: 6px;
         border-radius: 50%;
         border: 1px solid red;
         cursor: default;
@@ -27,6 +26,16 @@
         font-size: 8px;
         display: grid;
         place-content: center;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          bottom: -10px;
+          left: -10px;
+          /* 这些值会增加你的点击区域 */
+        }
       }
     }
   </style>
@@ -44,7 +53,7 @@
 
   <script>
     const select = document.querySelector('.protocol>p')
-    select.onclick = function() {
+    select.onclick = function () {
       select.textContent = select.textContent === '✅' ? '' : '✅'
     }
   </script>
