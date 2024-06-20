@@ -309,22 +309,7 @@
 
 
     <script src="./js/layout.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-    <script>
-      var filename = window.location.pathname.split("/").pop().replace(".html", "")
-      fetch(`./docs/${filename}.md`)
-        .then(response => response.text())
-        .then(text => {
-          var html = marked.parse(text);
-          document.getElementById('content').innerHTML = html;
-        });
-
-      const btnTest = document.getElementById('btn-test')
-      btnTest.onclick = function () {
-
-      }
-    </script>
+    <script src="./js/copy.js"></script>
   </div>
 </body>
 

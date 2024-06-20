@@ -26,6 +26,7 @@
         font-size: 8px;
         display: grid;
         place-content: center;
+        cursor: pointer;
 
         &::before {
           content: "";
@@ -47,10 +48,25 @@
       <div class="protocol">
         <p></p>请同意用户协议
       </div>
+
+      加一个伪元素扩大点击热区：
+      <pre>
+        <code>
+          &::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            bottom: -20px;
+            left: -20px;
+          }
+        </code>
+      </pre>
     </main>
-    <script src="./js/layout.js"></script>
   </div>
 
+  <script src="./js/layout.js"></script>
+  <script src="./js/copy.js"></script>
   <script>
     const select = document.querySelector('.protocol>p')
     select.onclick = function () {
