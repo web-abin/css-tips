@@ -1,4 +1,4 @@
-;(function () {
+; (function () {
   const pageDom = document.getElementById('website')
   const mainDom = document.querySelector('main')
   const _webHeader = `
