@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="./favicon.ico">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta name="google" content="notranslate">
+  <title>CSS-Tips</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/theme.css">
+  <style>
+    .page {
+      position: relative;
+      z-index: 9;
+      width: 100%;
+      height: 60vh;
+      overflow-y: scroll;
+    }
+
+    .height {
+      height: 200vh;
+    }
+
+    main {
+      height: 200vh;
+    }
+
+    .bg {
+      position: fixed;
+      left: 0;
+      top: -100px;
+      z-index: -1;
+      width: 150%;
+      height: auto;
+    }
+
+    .people {
+      position: fixed;
+      z-index: -1;
+      bottom: -40px;
+      right: 200px;
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body theme="light">
+  <div id="website">
+    <main>
+      <img src="./images/dislocation/img2.webp" alt="" class="bg">
+      <img src="./images/dislocation/img1.webp" alt="" class="people">
+    </main>
+  </div>
+
+  <script src="./js/layout.js"></script>
+
+  <script>
+    const web = document.querySelector('#website')
+    const bg = document.querySelector('.bg')
+    const people = document.querySelector('.people')
+
+    let lastScrollTop = 0; // 初始化上一次滚动位置
+    document.addEventListener('scroll', (e) => {
+      let scrollTop = document.documentElement.scrollTop;
+      bg.style.transform = `translateY(${scrollTop / 50}px)`
+      people.style.transform = `translateY(-${scrollTop / 100}px)`
+    })
+  </script>
+</body>
+
+</html>
